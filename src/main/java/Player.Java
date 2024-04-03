@@ -72,17 +72,4 @@ public class Player{
                 '}';
     }
    
-
-//! the bottom isn't finished yet
-
 }
-
-
-Player player = new Player.Builder()
-        .setName("John Doe")
-        .setAge(25)
-        .setPosition("Forward")
-        .setHeight(6.2)
-        .setIsAlive(true) // Set the isAlive status
-        .build();
-

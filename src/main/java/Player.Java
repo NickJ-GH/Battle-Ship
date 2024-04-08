@@ -11,7 +11,7 @@
 public class Player{
     private final String color;
     private int number_of_ships;
-    private Bool is_alive;
+    private Boolean is_alive;
 
      // Private constructor to enforce the use of the builder
     private Player(Builder builder) {
@@ -29,7 +29,7 @@ public class Player{
         return number_of_ships;
     }
 
-    public Bool getIsAlive() {
+    public Boolean getIsAlive() {
         if (number_of_ships > 0){
             is_alive = true;
         } else {
@@ -43,7 +43,7 @@ public class Player{
     public static class Builder {
         private String color;
         private int number_of_ships;
-        private Bool is_alive = true;
+        private Boolean is_alive = true;
 
         // Setter methods for the builder
         public Builder setColor(String color) {
@@ -66,9 +66,9 @@ public class Player{
     @Override
     public String toString() {
         return "Player{" +
-                "color = '" + color + '\'' +
-                ", has " + number_of_ships + " ships"
-                ", and isAlive = '" + is_alive + '\'' +
+                "color = '" + color + "\'" + ", has "
+                + number_of_ships + " ships, and isAlive = '"
+                + is_alive + '\'' +
                 '}';
     }
    

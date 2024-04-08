@@ -33,7 +33,7 @@ public class Player{
         if (number_of_ships > 0){
             is_alive = true;
         } else {
-            is_alive = false
+            is_alive = false;
         }
 
         return is_alive;

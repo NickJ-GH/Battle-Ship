@@ -75,6 +75,29 @@ public class BattleshipGame {
         }
     }
 
+    public void displayHidden() {
+        System.out.println(" ");
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            System.out.println(i + " ");
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                System.out.println(board[i][j] + " ");
+            }
+        }
+        System.out.println();
+
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            System.out.print(i + " ");
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (board[i][j] == 'X') {
+                    System.out.println(board[i][j] + " ");
+                } else {
+                    System.out.println("~ ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     private void playGame() {
         Scanner scanner = new Scanner(System.in);
 

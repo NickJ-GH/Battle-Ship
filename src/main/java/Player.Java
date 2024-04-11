@@ -8,17 +8,21 @@
 //subclass user
 //subclass cgp
 
+import java.util.Scanner;
+
 public class Player{
     private final String color;
     private int number_of_ships;
     private Boolean is_alive;
-    private Board playerBoard;
+
+    private Board board;
 
      // Private constructor to enforce the use of the builder
     private Player(Builder builder) {
         this.color = builder.color;
         this.number_of_ships = builder.number_of_ships;
         this.is_alive = builder.is_alive;
+        this.board = builder.board;
     }
 
     // Getters for the fields
@@ -26,18 +30,32 @@ public class Player{
         return color;
     }
 
+    public Board getBoard() {
+        return this.board;
+    }
+
+    public void turn(Board opponent_board) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter row (0-4): ");
+        int x = scanner.nextInt();
+
+        System.out.print("Enter column (0-4): ");
+        int y = scanner.nextInt();
+
+        opponent_board.hit(x, y);
+    }
+
     public int getNumber_of_Ships() {
         return number_of_ships;
     }
 
     public Boolean getIsAlive() {
-        if (number_of_ships > 0){
-            is_alive = true;
+        if (this.board.getNumShips() > 0){
+            return true;
         } else {
-            is_alive = false;
+            return false;
         }
-
-        return is_alive;
     }
 
     // Static nested Builder class
@@ -46,12 +64,18 @@ public class Player{
         private int number_of_ships;
         private Boolean is_alive = true;
 
+        private Board board;
+
         // Setter methods for the builder
         public Builder setColor(String color) {
             this.color = color;
             return this;
         }
 
+        public Builder setBoard(Board board) {
+            this.board = board;
+            return this;
+        }
         public Builder setNumber_of_Ships(int number_of_ships) {
             this.number_of_ships = number_of_ships;
             return this;

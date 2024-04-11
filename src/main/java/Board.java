@@ -7,9 +7,15 @@ public class Board {
     private char[][] board;
     private static Board instance;
 
+    private int numShips = 4;
+
     public Board() {
         board = new char[BOARD_SIZE][BOARD_SIZE];
         initializeBoard();
+    }
+
+    public int getNumShips() {
+        return this.numShips;
     }
 
     public static Board getInstance() {
@@ -31,13 +37,23 @@ public class Board {
         }
     }
 
-    public boolean isHit(int row, int col) {
-        return board[row][col] == 'O';
+    public void hit(int row, int col) {
+        if (board[row][col] == '0') {
+            board[row][col] = 'X';
+            System.out.println("Hit!");
+            numShips --;
+        } else {
+            System.out.println("Miss");
+        }
     }
 
-    public void markHit(int row, int col) {
-        board[row][col] = 'X';
-    }
+//    public boolean isHit(int row, int col) {
+//        return board[row][col] == 'O';
+//    }
+//
+//    public void markHit(int row, int col) {
+//        board[row][col] = 'X';
+//    }
 
     public void displayBoard() {
         System.out.print("  ");
@@ -50,6 +66,29 @@ public class Board {
             System.out.print(i + " ");
             for (int j = 0; j < BOARD_SIZE; j++) {
                 System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void displayHidden() {
+        System.out.println(" ");
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            System.out.println(i + " ");
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                System.out.println(board[i][j] + " ");
+            }
+        }
+        System.out.println();
+
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            System.out.print(i + " ");
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (board[i][j] == 'X') {
+                    System.out.println(board[i][j] + " ");
+                } else {
+                    System.out.println("~ ");
+                }
             }
             System.out.println();
         }

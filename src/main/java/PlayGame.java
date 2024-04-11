@@ -7,19 +7,30 @@ public class PlayGame {
 
     private int numShips;
     private Random random;
+    private Board player1_board = new Board();
+    private Board player2_board = new Board();
+    private Player player1 = new Player(player1_board);
 
-    private Player player1;
+    private Player player2 = new Player(player2_board);
 
-    private Player player2;
-
-    private Board player1_board;
-    private Board player2_board;
 
     public PlayGame(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
         this.player1_board = player1.getBoard();
         this.player2_board = player2.getBoard();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Place your ships on your board!");
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println("Enter row number");
+            int row = scanner.nextInt();
+            System.out.println("Enter column number");
+            int col = scanner.nextInt();
+
+            player1_board.placeShip(row, col);
+        }
 
         while (!gameOver()) {
             player1_board.displayBoard();

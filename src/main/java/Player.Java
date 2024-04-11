@@ -12,6 +12,7 @@ public class Player{
     private final String color;
     private int number_of_ships;
     private Boolean is_alive;
+    private Board playerBoard;
 
      // Private constructor to enforce the use of the builder
     private Player(Builder builder) {

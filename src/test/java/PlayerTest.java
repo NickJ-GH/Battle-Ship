@@ -7,8 +7,9 @@ public class PlayerTest {
     @Test
     public void playerCreation() {
         Board board = new Board();
-        Player player1 = new Player(board);
+        PlayerStrategy strategy = new User(); 
+        Player player1 = new Player(board, strategy);
 
-//        assertNotNull(player1);
+        assertNotNull(player1);
     }
 }

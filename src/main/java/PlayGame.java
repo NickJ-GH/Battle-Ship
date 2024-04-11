@@ -7,7 +7,7 @@ public class PlayGame {
 
     private static Board player1_board = new Board();
     private static Board player2_board = new Board();
-    private static Player player1 = new User(player1_board);
+    private static Player player1 = new Player(player1_board, new User());
     private static Player player2;
 
     public static void main(String[] args) {
@@ -21,9 +21,9 @@ public class PlayGame {
         int choice = scanner.nextInt();
 
         if (choice == 1) {
-            player2 = new Cpu(player2_board);
+            player2 = new Player(player2_board, new Cpu());
         } else {
-            player2 = new User(player2_board);
+            player2 = new Player(player2_board, new User());
         }
 
         PlayGame game = new PlayGame(player1, player2);
@@ -43,7 +43,7 @@ public class PlayGame {
          player1_board.displayBoard();
  
         // Place ships for Player 2 or CPU
-        if (player2 instanceof User) {
+        if (player2.getStrategy() instanceof User) {
             System.out.println("Player 2, place your ships on your board!");
             placeShips(player2_board);
             player2_board.displayBoard();

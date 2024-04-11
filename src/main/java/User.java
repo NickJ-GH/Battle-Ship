@@ -1,12 +1,10 @@
+//*  uses a strategy pattern for players, users, cpu, helped with PlayerStratagy
+
 import java.util.Scanner;
 
-class User extends Player {
+class User implements PlayerStrategy {
 
     private Scanner scanner = new Scanner(System.in);
-
-    public User(Board board) {
-        super(board);
-    }
 
     @Override
     public void turn(Board opponent_board) {

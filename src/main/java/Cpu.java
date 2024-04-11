@@ -1,7 +1,6 @@
-class Cpu extends Player {
-    public Cpu(Board board) {
-        super(board);
-    }
+//*  uses a strategy pattern for players, users, cpu, helped with PlayerStratagy
+
+class Cpu implements PlayerStrategy {
 
     @Override
     public void turn(Board opponent_board) {

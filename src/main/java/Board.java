@@ -38,13 +38,13 @@ public class Board {
     }
 
     public void hit(int row, int col) {
-        board[row][col] = 'X';
         if (board[row][col] == 'O') {
             System.out.println("Hit!");
             numShips --;
         } else {
             System.out.println("Miss");
         }
+        board[row][col] = 'X';
     }
 
 //    public boolean isHit(int row, int col) {

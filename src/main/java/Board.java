@@ -90,6 +90,10 @@ public class Board {
             System.out.println();
         }
     }
+
+    public char[][] getBoard() {
+        return board;
+    }
     
 
     public static int getBoardSize() {

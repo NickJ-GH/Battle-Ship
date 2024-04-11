@@ -5,15 +5,27 @@ public class PlayGame {
     final int BOARD_SIZE = 10;
     private static final int NUM_SHIPS = 4;
 
-    private int numShips;
-    private Random random;
     private static Board player1_board = new Board();
     private static Board player2_board = new Board();
-    private static Player player1 = new Player(player1_board);
-
-    private static Player player2 = new Player(player2_board);
+    private static Player player1 = new User(player1_board);
+    private static Player player2;
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt for game mode
+        System.out.println("Choose game mode:");
+        System.out.println("1. Player vs CPU");
+        System.out.println("2. Player vs Player");
+        System.out.print("Enter choice (1 or 2): ");
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            player2 = new Cpu(player2_board);
+        } else {
+            player2 = new User(player2_board);
+        }
+
         PlayGame game = new PlayGame(player1, player2);
     }
 
@@ -24,57 +36,76 @@ public class PlayGame {
         this.player1_board = player1.getBoard();
         this.player2_board = player2.getBoard();
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Player 1 place your ships on your board!");
 
-        for (int i = 0; i < 4; i++) {
-            System.out.println("Enter row number");
-            int row = scanner.nextInt();
-            System.out.println("Enter column number");
-            int col = scanner.nextInt();
-
-            player1_board.placeShip(row, col);
-        }
-        player1_board.displayBoard();
-
-        System.out.println("Player 2 place your ships on the board!");
-        for (int i = 0; i < 4; i++) {
-            System.out.println("Enter row number");
-            int row = scanner.nextInt();
-            System.out.println("Enter column number");
-            int col = scanner.nextInt();
-
-            player2_board.placeShip(row, col);
-        }
-        player2_board.displayBoard();
-
-
-        while (!gameOver()) {
-            System.out.println("** PLayer 1 turn **");
-            System.out.println("Your board");
-            player1_board.displayBoard();
-            System.out.println("Your opponents board");
-            player2_board.displayHidden();
-            player1.turn(player2_board);
-            System.out.println("** Player 2 turn **");
-            System.out.println("Your board");
+         // Place ships for Player 1
+         System.out.println("Player 1, place your ships on your board!");
+         placeShips(player1_board);
+         player1_board.displayBoard();
+ 
+        // Place ships for Player 2 or CPU
+        if (player2 instanceof User) {
+            System.out.println("Player 2, place your ships on your board!");
+            placeShips(player2_board);
             player2_board.displayBoard();
-            System.out.println("Your opponents board");
-            player1_board.displayHidden();
-            player2.turn(player1_board);
+        } else {
+            System.out.println("CPU is placing its ships...");
+            placeShipsRandomly(player2_board);
+            System.out.println("CPU has placed its ships.");
         }
 
+         // Game loop
+        while (!gameOver()) {
+            playerTurn(player1, player2_board, "Player 1");
+            if (gameOver()) {
+                break;
+            }
+            playerTurn(player2, player2_board, "Player 2");
+        }
+    }
+
+
+    private void playerTurn(Player player, Board opponentBoard, String playerName) {
+        System.out.println("** " + playerName + " turn **");
+        System.out.println("Your board:");
+        player.getBoard().displayBoard();
+        System.out.println("Your opponent's board:");
+        opponentBoard.displayHidden();
+        player.turn(opponentBoard);
     }
 
     private boolean gameOver() {
-        boolean gameOver = false;
         if (!player2.getIsAlive() && player1.getIsAlive()) {
-            System.out.println("You win, congratulations!");
-            gameOver = true;
+            System.out.println("Player 1 wins! Congratulations!");
+            return true;
         } else if (!player1.getIsAlive() && player2.getIsAlive()) {
-            System.out.println("Your opponent wins! Better luck next time");
-            gameOver = true;
+            System.out.println("Player 2 wins! Better luck next time.");
+            return true;
         }
-        return gameOver;
+        return false;
     }
+
+
+    private void placeShips(Board board) {
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < NUM_SHIPS; i++) {
+            System.out.println("Enter row number for ship " + (i + 1) + " (0-9):");
+            int row = scanner.nextInt();
+            System.out.println("Enter column number for ship " + (i + 1) + " (0-9):");
+            int col = scanner.nextInt();
+            board.placeShip(row, col);
+        }
+    }
+
+
+    private void placeShipsRandomly(Board board) {
+        for (int i = 0; i < NUM_SHIPS; i++) {
+            int row, col;
+            do {
+                row = (int) (Math.random() * Board.getBoardSize());
+                col = (int) (Math.random() * Board.getBoardSize());
+            } while (board.getBoard()[row][col] == 'O');
+            board.placeShip(row, col);
+        }
+    }
+
 }

@@ -10,7 +10,7 @@ public class PlayGameTest {
         Player player1 = new Player(player1_board);
         Player player2 = new Player(player2_board);
 
-
+        PlayGame game = new PlayGame(player1, player2);
     }
 
 }

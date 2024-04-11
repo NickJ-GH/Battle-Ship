@@ -38,8 +38,8 @@ public class Board {
     }
 
     public void hit(int row, int col) {
-        if (board[row][col] == '0') {
-            board[row][col] = 'X';
+        board[row][col] = 'X';
+        if (board[row][col] == 'O') {
             System.out.println("Hit!");
             numShips --;
         } else {
@@ -72,22 +72,19 @@ public class Board {
     }
 
     public void displayHidden() {
-        System.out.println(" ");
+        System.out.print("  ");
         for (int i = 0; i < BOARD_SIZE; i++) {
-            System.out.println(i + " ");
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                System.out.println(board[i][j] + " ");
-            }
+            System.out.print(i + " ");
         }
         System.out.println();
 
         for (int i = 0; i < BOARD_SIZE; i++) {
             System.out.print(i + " ");
             for (int j = 0; j < BOARD_SIZE; j++) {
-                if (board[i][j] == 'X') {
-                    System.out.println(board[i][j] + " ");
+                if (board[i][j] == 'O') {
+                    System.out.print("~ ");
                 } else {
-                    System.out.println("~ ");
+                    System.out.print(board[i][j] + " ");
                 }
             }
             System.out.println();

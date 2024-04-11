@@ -7,11 +7,15 @@ public class PlayGame {
 
     private int numShips;
     private Random random;
-    private Board player1_board = new Board();
-    private Board player2_board = new Board();
-    private Player player1 = new Player(player1_board);
+    private static Board player1_board = new Board();
+    private static Board player2_board = new Board();
+    private static Player player1 = new Player(player1_board);
 
-    private Player player2 = new Player(player2_board);
+    private static Player player2 = new Player(player2_board);
+
+    public static void main(String[] args) {
+        PlayGame game = new PlayGame(player1, player2);
+    }
 
 
     public PlayGame(Player player1, Player player2) {
@@ -21,7 +25,7 @@ public class PlayGame {
         this.player2_board = player2.getBoard();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Place your ships on your board!");
+        System.out.println("Player 1 place your ships on your board!");
 
         for (int i = 0; i < 4; i++) {
             System.out.println("Enter row number");
@@ -31,12 +35,31 @@ public class PlayGame {
 
             player1_board.placeShip(row, col);
         }
+        player1_board.displayBoard();
+
+        System.out.println("Player 2 place your ships on the board!");
+        for (int i = 0; i < 4; i++) {
+            System.out.println("Enter row number");
+            int row = scanner.nextInt();
+            System.out.println("Enter column number");
+            int col = scanner.nextInt();
+
+            player2_board.placeShip(row, col);
+        }
+        player2_board.displayBoard();
+
 
         while (!gameOver()) {
+            System.out.println("** PLayer 1 turn **");
+            System.out.println("Your board");
             player1_board.displayBoard();
+            System.out.println("Your opponents board");
             player2_board.displayHidden();
             player1.turn(player2_board);
+            System.out.println("** Player 2 turn **");
+            System.out.println("Your board");
             player2_board.displayBoard();
+            System.out.println("Your opponents board");
             player1_board.displayHidden();
             player2.turn(player1_board);
         }

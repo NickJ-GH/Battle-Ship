@@ -40,11 +40,12 @@ public class Board {
     public void hit(int row, int col) {
         if (board[row][col] == 'O') {
             System.out.println("Hit!");
+            board[row][col] = 'M';
             numShips --;
         } else {
             System.out.println("Miss");
         }
-        board[row][col] = 'X';
+        board[row][col] = 'M';
     }
 
 //    public boolean isHit(int row, int col) {

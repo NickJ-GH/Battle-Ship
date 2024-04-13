@@ -12,7 +12,7 @@ public class GameLoop {
         runGameLoop();
     }
 
-    private void runGameLoop() {
+    public void runGameLoop() {
         while (!gameOver()) {
             playerTurn(player1, player2Board, "Player 1");
             if (gameOver()) {
@@ -22,7 +22,7 @@ public class GameLoop {
         }
     }
 
-    private void playerTurn(Player player, Board opponentBoard, String playerName) {
+    public void playerTurn(Player player, Board opponentBoard, String playerName) {
         System.out.println("** " + playerName + " turn **");
         System.out.println("Your board:");
         player.getBoard().displayBoard();
@@ -31,7 +31,7 @@ public class GameLoop {
         player.turn(opponentBoard);
     }
 
-    private boolean gameOver() {
+    public boolean gameOver() {
         if (!player2.getIsAlive() && player1.getIsAlive()) {
             System.out.println("Player 1 wins! Congratulations!");
             return true;

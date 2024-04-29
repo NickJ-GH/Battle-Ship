@@ -7,8 +7,12 @@ public class GameSetup {
     private Board player2Board;
 
     public GameSetup() {
-        this.player1Board = new Board();
-        this.player2Board = new Board();
+        this.player1Board = new Board.Builder()
+            .withNumShips(4)
+            .build();
+        this.player2Board = new Board.Builder()
+            .withNumShips(4)
+            .build();
         this.player1 = new Player(player1Board, new User());
         chooseGameMode();
         placeShips();

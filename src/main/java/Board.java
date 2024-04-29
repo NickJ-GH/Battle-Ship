@@ -3,18 +3,20 @@
 // Use a factory pattern for Board.Builder class 
 
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Board {
     private static final int BOARD_SIZE = 10;
     private char[][] board;
     private int numShips;
     private static Board instance;
-
+    private ArrayList<Coordinate> chosen;
 
     // Private constructor to be used by the builder
     private Board() {
         board = new char[BOARD_SIZE][BOARD_SIZE];
         initializeBoard();
+        chosen = new ArrayList<>();
     }
 
     private void initializeBoard() {
@@ -28,6 +30,14 @@ public class Board {
         if (board[row][col] == '~') {
             board[row][col] = 'O';
         }
+    }
+
+    public void addToChosen(Coordinate cord) {
+        chosen.add(cord);
+    }
+
+    public ArrayList<Coordinate> getChosen() {
+        return chosen;
     }
 
     public void hit(int row, int col) {

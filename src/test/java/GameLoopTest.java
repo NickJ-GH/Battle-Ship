@@ -11,14 +11,15 @@ public class GameLoopTest {
     PlayerStrategy strategy = new User();
     Player player1 = new Player(board1, strategy);
     Player player2 = new Player(board2, strategy);
-    GameLoop game = new GameLoop(player1, player2);
+    BattleshipGraphics graphics = new BattleshipGraphics();
+    GameLoop game = new GameLoop(player1, player2, graphics );
 
     @Test
     public void testGameLoopInstantiation() {
         ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
 
-        GameLoop game1 = new GameLoop(player1, player2);
+        GameLoop game = new GameLoop(player1, player2, graphics );
 //         Retrieve the printed output
         String printedOutput = outputStreamCaptor.toString().trim();
         assertNotNull(printedOutput);
@@ -40,7 +41,7 @@ public class GameLoopTest {
         ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
 
-        game.playerTurn(player1, board2, "Mark");
+        game.playerTurn(player1, board2, "Mark",1);
 //         Retrieve the printed output
         String printedOutput = outputStreamCaptor.toString().trim();
         assertNotNull(printedOutput);

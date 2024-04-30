@@ -33,7 +33,7 @@ public class BattleshipGraphics extends JFrame {
 
     public Board board1;
 
-    public Board board2 = new Board();
+    public Board board2 = new Board.Builder().build();
     public BattleshipGraphics() {
         setTitle("Battleship Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

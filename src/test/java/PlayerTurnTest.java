@@ -5,12 +5,8 @@ public class PlayerTurnTest {
 
     @Test
     public void testPlayer2HitsPlayer1Ship() {
-        Board player1Board = new Board.Builder()
-            .withNumShips(4)
-            .build();
-        Board player2Board = new Board.Builder()
-            .withNumShips(4)
-            .build();
+        Board player1Board = new Board.Builder().build();
+        Board player2Board = new Board.Builder().build();
 
         PlayerStrategy player1Strategy = new User(); // Use User or Cpu based on your needs
         PlayerStrategy player2Strategy = new User(); // Use User or Cpu based on your needs

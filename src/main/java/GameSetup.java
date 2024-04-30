@@ -10,8 +10,8 @@ public class GameSetup {
     private BattleshipGraphics graphics;
 
     public GameSetup(BattleshipGraphics graphics) {
-        this.player1Board = new Board();
-        this.player2Board = new Board();
+        this.player1Board = new Board.Builder().build();
+        this.player2Board = new Board.Builder().build();
         this.player1 = new Player(player1Board, new User());
         this.graphics = graphics;
         chooseGameMode();

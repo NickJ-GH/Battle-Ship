@@ -7,12 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class PlayerTest {
 
-    Board board = new Board();
+    Board board = new Board.Builder()
+        .withNumShips(4)
+        .build();
     PlayerStrategy strategy = new User();
     Player player1 = new Player(board, strategy);
     @Test
     public void playerCreation() {
-        Board board = new Board();
+        Board board = new Board.Builder()
+            .withNumShips(4)
+            .build();
         PlayerStrategy strategy = new User(); 
         Player player1 = new Player(board, strategy);
 

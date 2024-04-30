@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameSetup {
@@ -6,23 +7,27 @@ public class GameSetup {
     private Board player1Board;
     private Board player2Board;
 
-    public GameSetup() {
+    private BattleshipGraphics graphics;
+
+    public GameSetup(BattleshipGraphics graphics) {
         this.player1Board = new Board();
         this.player2Board = new Board();
         this.player1 = new Player(player1Board, new User());
+        this.graphics = graphics;
         chooseGameMode();
         placeShips();
     }
 
     private void chooseGameMode() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose game mode:");
-        System.out.println("1. Player vs CPU");
-        System.out.println("2. Player vs Player");
-        System.out.print("Enter choice (1 or 2): ");
-        int choice = scanner.nextInt();
-
-        if (choice == 1) {
+        int choice = graphics.chooseGameMode();
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Choose game mode:");
+//        System.out.println("1. Player vs CPU");
+//        System.out.println("2. Player vs Player");
+//        System.out.print("Enter choice (1 or 2): ");
+//        int choice = scanner.nextInt();
+//
+        if (choice == 0) {
             this.player2 = new Player(player2Board, new Cpu());
         } else {
             this.player2 = new Player(player2Board, new User());
@@ -30,19 +35,32 @@ public class GameSetup {
     }
 
     private void placeShips() {
-        System.out.println("Player 1, place your ships on your board!");
-        ShipPlacement.placeShips(player1Board);
+        graphics.placeShipsDialog(1, player1Board);
+        this.player1Board = graphics.getBoard1();
         player1Board.displayBoard();
-
+//        ArrayList<Integer> ship = graphics.getShipLocation();
+//        System.out.println(ship);
+//        System.out.println("Player 1, place your ships on your board!");
+//        ShipPlacement.placeShips(player1Board);
+//        player1Board.displayBoard();
+//
         if (player2.getStrategy() instanceof User) {
-            System.out.println("Player 2, place your ships on your board!");
-            ShipPlacement.placeShips(player2Board);
-            player2Board.displayBoard();
+            graphics.placeShipsDialog(2, player2Board);
+            this.player2Board = graphics.getBoard2();
         } else {
-            System.out.println("CPU is placing its ships...");
+            graphics.placeCPUDialog();
             ShipPlacement.placeShipsRandomly(player2Board);
-            System.out.println("CPU has placed its ships.");
         }
+
+        player2Board.displayBoard();
+//            System.out.println("Player 2, place your ships on your board!");
+//            ShipPlacement.placeShips(player2Board);
+//            player2Board.displayBoard();
+//        } else {
+//            System.out.println("CPU is placing its ships...");
+//            ShipPlacement.placeShipsRandomly(player2Board);
+//            System.out.println("CPU has placed its ships.");
+//        }
     }
 
     public Player getPlayer1() {

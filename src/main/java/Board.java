@@ -37,15 +37,17 @@ public class Board {
         }
     }
 
-    public void hit(int row, int col) {
+    public boolean hit(int row, int col) {
         if (board[row][col] == 'O') {
             System.out.println("Hit!");
-            board[row][col] = 'M';
+            board[row][col] = 'H';
             numShips --;
+            return true;
         } else {
             System.out.println("Miss");
         }
         board[row][col] = 'M';
+        return false;
     }
 
 //    public boolean isHit(int row, int col) {

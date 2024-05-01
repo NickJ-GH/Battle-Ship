@@ -56,9 +56,9 @@ public class BattleshipGraphics extends JFrame {
         startGame();
     }
 
-    public void setMouseClickMode(MouseClickMode mode) {
-        this.currentMode = mode;
-    }
+//    public void setMouseClickMode(MouseClickMode mode) {
+//        this.currentMode = mode;
+//    }
 
     private void initializeGrid(JPanel gridPanel) {
         for (int row = 0; row < GRID_SIZE; row++) {
@@ -251,22 +251,6 @@ public class BattleshipGraphics extends JFrame {
         }
         dispose();
     }
-
-
-//    private class GridMouseListener extends MouseAdapter {
-//        private int row;
-//        private int col;
-//
-//        public GridMouseListener(int row, int col) {
-//            this.row = row;
-//            this.col = col;
-//        }
-//
-//        @Override
-//        public void mouseClicked(MouseEvent e) {
-//            handleGuess(row, col);
-//        }
-//    }
 
     public int chooseGameMode() {
         String[] options = {"Player vs. CPU", "Player vs. Player"};

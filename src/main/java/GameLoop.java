@@ -6,6 +6,7 @@ public class GameLoop {
 
     private BattleshipGraphics graphics;
 
+
     public GameLoop(Player player1, Player player2, BattleshipGraphics graphics) {
         this.player1 = player1;
         this.player2 = player2;
@@ -13,6 +14,26 @@ public class GameLoop {
         this.player2Board = player2.getBoard();
         this.graphics = graphics;
         runGameLoop();
+    }
+
+    public Player getPlayer1() {
+        return this.player1;
+    }
+
+    public Player getPlayer2() {
+        return this.player2;
+    }
+
+    public Board getPlayer1Board() {
+        return this.player1Board;
+    }
+
+    public Board getPlayer2Board() {
+        return this.player2Board;
+    }
+
+    public BattleshipGraphics getGraphics() {
+        return this.graphics;
     }
 
     public void runGameLoop() {

@@ -10,6 +10,6 @@ public class PlayGame {
         Player player1 = setup.getPlayer1();
         Player player2 = setup.getPlayer2();
 
-        new GameLoop(player1, player2, graphics);
+        GameLoop gameLoop = GameLoop.getInstance(player1, player2, graphics); // new GameLoop(player1, player2, graphics);
     }
 }

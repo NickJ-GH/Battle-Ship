@@ -10,7 +10,9 @@ public class PlayerTest {
     Board board = new Board.Builder().build();
     PlayerStrategy strategy = new User();
     Player player1 = new Player(board, strategy);
-    @Test
+    
+
+    @Test // Test Player initialization
     public void playerCreation() {
         Board board = new Board.Builder().build();
         PlayerStrategy strategy = new User(); 
@@ -19,17 +21,17 @@ public class PlayerTest {
         assertNotNull(player1);
     }
 
-    @Test
+    @Test // Test getBoard 
     public void testGetBoard() {
         assertNotNull(player1.getBoard());
     }
 
-    @Test
+    @Test // Test getStrategy
     public void testGetStrategy() {
         assertNotNull(player1.getStrategy());
     }
 
-    @Test
+    @Test // Test getIsAlive
     public void testIsAlive() {
         assertNotNull(player1.getIsAlive());
     }

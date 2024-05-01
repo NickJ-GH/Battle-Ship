@@ -3,8 +3,10 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameLoopTest {
     Board board1 = Board.getInstance();
@@ -31,7 +33,7 @@ public class GameLoopTest {
         assertEquals(player2.getBoard(), gameLoop.getPlayer2Board());
         assertEquals(graphics, gameLoop.getGraphics());
     }
-
+   
 //    @Test
 //    public void testRun() {
 //        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();

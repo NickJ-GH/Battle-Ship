@@ -5,11 +5,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 public class UserTest {
-    @Test
+    @Test // Test turn method
     public void testTurn() {
         InputStream inputStream = new ByteArrayInputStream("1\n1\n".getBytes());
         System.setIn(inputStream);

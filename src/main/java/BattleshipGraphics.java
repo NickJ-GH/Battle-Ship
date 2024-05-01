@@ -10,7 +10,8 @@ public class BattleshipGraphics extends JFrame {
         PLAYER_1_PLACE,
         PLAYER_2_PLACE,
         PLAYER_1_HIT,
-        PLAYER_2_HIT
+        PLAYER_2_HIT,
+        CPU_HIT
     }
 
     public int player = 1;
@@ -40,7 +41,7 @@ public class BattleshipGraphics extends JFrame {
 
         // Create a panel for the game grid with GridLayout
         JPanel gridPanel = new JPanel(new GridLayout(GRID_SIZE, GRID_SIZE));
-        gridLabels = new JLabel[GRID_SIZE][GRID_SIZE];
+        gridLabels = new JLabel[GRID_SIZE*2][GRID_SIZE];
         initializeGrid(gridPanel);
 
         // Add the grid panel to the content pane
@@ -126,10 +127,9 @@ public class BattleshipGraphics extends JFrame {
         this.spacesClicked = 0;
         this.maxClicks = 1;
 
-        String title = "Player" + player;
-        JOptionPane.showMessageDialog(this, "Click anywhere to shoot a cannon", title, JOptionPane.INFORMATION_MESSAGE);
 
         if (player == 1) {
+            JOptionPane.showMessageDialog(this, "Click anywhere to shoot a cannon", "Player 1", JOptionPane.INFORMATION_MESSAGE);
             this.currentMode = MouseClickMode.PLAYER_1_HIT;
             for (int row = 0; row < GRID_SIZE; row++) {
                 for (int col = 0; col < GRID_SIZE; col++) {
@@ -146,6 +146,7 @@ public class BattleshipGraphics extends JFrame {
                 }
             }
         } else if (selectedOption == 1) {
+            JOptionPane.showMessageDialog(this, "Click anywhere to shoot a cannon", "Player 2", JOptionPane.INFORMATION_MESSAGE);
             this.currentMode = MouseClickMode.PLAYER_2_HIT;
             for (int row = 0; row < GRID_SIZE; row++) {
                 for (int col = 0; col < GRID_SIZE; col++) {
@@ -161,11 +162,8 @@ public class BattleshipGraphics extends JFrame {
                 }
             }
         } else {
-            int row = (int) (Math.random() * Board.getBoardSize());
-            int col = (int) (Math.random() * Board.getBoardSize());
-
-            handleTurn(row, col, 2);
-
+            this.currentMode = MouseClickMode.CPU_HIT;
+            handleCpuTurn();
         }
         waitForClick();
     }
@@ -186,6 +184,18 @@ public class BattleshipGraphics extends JFrame {
                 disableFurtherClicks();
             }
         }
+    }
+
+    private void handleCpuTurn() {
+        int row = (int) (Math.random() * Board.getBoardSize());
+        int col = (int) (Math.random() * Board.getBoardSize());
+
+        if (board1.hit(row, col)) {
+            JOptionPane.showMessageDialog(this, "Opponent hit one of your ships!", "", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Opponent missed!", "", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 
     private void handleTurn(int row, int col, int player) {
@@ -211,11 +221,14 @@ public class BattleshipGraphics extends JFrame {
             }
             spacesClicked++;
 
-            if (player == 1) {
-                board1.placeShip(row, col);
-            } else {
-                board2.placeShip(row, col);
-            }
+//            if (player == 1) {
+//                board1.placeShip(row, col);
+//            } else {
+//                board2.placeShip(row, col);
+//            }
+
+            board1.displayBoard();
+            board2.displayBoard();
 
             if (spacesClicked == maxClicks) {
                 disableFurtherClicks();
@@ -224,11 +237,13 @@ public class BattleshipGraphics extends JFrame {
     }
 
     private void waitForClick() {
-        while (spacesClicked < maxClicks) {
-            try {
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                e.printStackTrace();
+        if (this.currentMode != MouseClickMode.CPU_HIT) {
+            while (spacesClicked < maxClicks) {
+                try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

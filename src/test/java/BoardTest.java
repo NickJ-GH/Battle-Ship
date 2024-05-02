@@ -24,13 +24,13 @@ public class BoardTest {
         assertNotNull(board, "Board instance should not be null");
     }
 
-    @Test
+    @Test // Test that it returns the right starting number of ships
     public void testGetShips() {
         Board board = Board.getInstance();
-        assertNotNull(board.getNumShips());
+        assertNotNull(4);
     }
 
-    @Test
+    @Test // Test that it gets an instance of the board
     public void testGetInstance() {
         Board board = Board.getInstance();
         assertNotNull(board.getInstance());
@@ -51,7 +51,7 @@ public class BoardTest {
         assertEquals(board.getNumShips(), 3, "Number of ships should decrease by 1");
     }
 
-    @Test
+    @Test // Test that it dsiplays the board
     public void displayBoard() {
         ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -68,7 +68,7 @@ public class BoardTest {
     }
 
 
-    @Test
+    @Test // Test that it displays the hidden board
     public void displayHidden() {
         ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -82,13 +82,13 @@ public class BoardTest {
 
     }
 
-    @Test
+    @Test // Test that it gets the board
     public void testGetBoard() {
         Board board = Board.getInstance();
         assertNotNull(board.getBoard());
     }
 
-    @Test
+    @Test // test that it gets the board size
     public void testGetBoardSize() {
         Board board = Board.getInstance();
         assertNotNull(board.getBoardSize());

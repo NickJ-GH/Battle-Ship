@@ -153,7 +153,6 @@ public class Data {
 
         new GameLoop(player1, player2);
 
-        // Alter CPU.java 
     
         // Return the winning player's "strategy"
         if(player1Wins) {
@@ -169,7 +168,7 @@ public class Data {
     
 }
 
-// TODO: THIS NEEDS TO GO IN A DIFFERENT FILE 
+// TODO: THIS NEEDS TO GO IN A DIFFERENT FILE, it is for training 
 /* Main
  * playTrainingGame for x different initial board setups
  * result of each game: turns_x 
@@ -188,13 +187,5 @@ public class Data {
 //         ArrayList<Turn> turns = data.playTrainingGame(initialBoardSetups[i]);
 //         trainingData.add(turns);
 //     }
-
-//     // Transforming game states into inputs for the models
-//     List<String> transformedData = new ArrayList<>();
-//     for (List<String> turn : trainingData) {
-//         String input = data.gameStateToInputs(turn);
-//         transformedData.add(input);
-//     }
-
 //     // Using transformedData to train models
 // }

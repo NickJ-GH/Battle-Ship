@@ -33,7 +33,7 @@ Joanna: Decision tree library, random forest creation and training, generating g
 - Strategy Pattern (Player's Turn): When a player takes their turn, they choose a cell to attack on the opponent’s board. The system updates the board based on whether it was a hit or a miss.
 - Placing Ships: When a player chooses a row and a column to place a ship, the ship is placed on the selected coordinates if not already occupied.
 - Hitting a Ship: When a player selects a coordinate that contains the opponent’s ship, the cell changes to indicate a hit ‘X’. The number of ships the opponent has decreases by one.
-- Hittin a ship twice: A player will not be able to hit a ship twice.
+- Hitting a ship twice: A player will not be able to hit a ship twice.
 - Game Setup: When the player chooses the game mode Player vs CPU, the player is prompted for information to fill out their board and the other board is generated randomly. When the player chooses the game mode Player vs Player, both players are prompted for information to fill out their board.
 - Ship placement maximum: When a player is placing their ships on the board, they will not be able to click on more than four spaces before going to the next step
 

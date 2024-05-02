@@ -1,13 +1,12 @@
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BoardTest {
 
@@ -93,5 +92,79 @@ public class BoardTest {
     public void testGetBoardSize() {
         Board board = Board.getInstance();
         assertNotNull(board.getBoardSize());
+    }
+
+    @Test // Test initial state of chosenCoordinates
+    public void testChosenCoordinatesInitialization() {
+        Board board = new Board.Builder().build();
+
+        List<Coordinate> chosenCoordinates = board.getChosen();
+        assertTrue(chosenCoordinates.isEmpty(), "Chosen coordinates should be empty initially");
+    }
+
+    @Test // Test adding coordinates to chosenCoordinates
+    public void testAddToChosen() {
+        Board board = new Board.Builder().build();
+
+        Coordinate coord1 = new Coordinate(1, 1);
+        Coordinate coord2 = new Coordinate(2, 2);
+
+        board.addToChosen(coord1);
+        board.addToChosen(coord2);
+
+        List<Coordinate> chosenCoordinates = board.getChosen();
+
+        assertEquals(2, chosenCoordinates.size(), "Two coordinates should be added to the chosen list");
+        assertTrue(chosenCoordinates.contains(coord1), "List should contain coordinate (1, 1)");
+        assertTrue(chosenCoordinates.contains(coord2), "List should contain coordinate (2, 2)");
+    }
+
+    @Test // Test the order of chosen coordinates
+    public void testChosenCoordinatesOrder() {
+        Board board = new Board.Builder().build();
+
+        Coordinate coord1 = new Coordinate(1, 1);
+        Coordinate coord2 = new Coordinate(2, 2);
+
+        board.addToChosen(coord1);
+        board.addToChosen(coord2);
+
+        List<Coordinate> chosenCoordinates = board.getChosen();
+
+        assertEquals(coord1, chosenCoordinates.get(0), "The first coordinate should be (1, 1)");
+        assertEquals(coord2, chosenCoordinates.get(1), "The second coordinate should be (2, 2)");
+    }
+
+    @Test // Test uniqueness of chosen coordinates
+    public void testUniqueChosenCoordinates() {
+        Board board = new Board.Builder().build();
+
+        Coordinate coord1 = new Coordinate(1, 1);
+        Coordinate coord2 = new Coordinate(1, 1);
+
+        board.addToChosen(coord1);
+        board.addToChosen(coord2);
+
+        List<Coordinate> chosenCoordinates = board.getChosen();
+
+        assertEquals(2, chosenCoordinates.size(), "Two coordinates with the same value should both be added");
+
+        // Optionally add checks to prevent duplicates or handle them differently based on design decisions
+    }
+
+    @Test // Test retrieving chosen coordinates
+    public void testGetChosenCoordinates() {
+        Board board = new Board.Builder().build();
+
+        Coordinate coord1 = new Coordinate(3, 3);
+        Coordinate coord2 = new Coordinate(4, 4);
+
+        board.addToChosen(coord1);
+        board.addToChosen(coord2);
+
+        List<Coordinate> chosenCoordinates = board.getChosen();
+
+        assertEquals(coord1, chosenCoordinates.get(0), "Retrieved coordinates should match added ones");
+        assertEquals(coord2, chosenCoordinates.get(1), "Retrieved coordinates should match added ones");
     }
 }
